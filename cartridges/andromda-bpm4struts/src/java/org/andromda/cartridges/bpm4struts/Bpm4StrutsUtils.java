@@ -377,11 +377,12 @@ public final class Bpm4StrutsUtils
     	return s.substring(s.length() - length, s.length());
     }
     
-    public static String getDataTypeId(String nome, String dir)
-    {    	
+    public static String getDataTypeId(String nome)
+    {
+    	String userHome = System.getProperty("user.home");
     	String id = new String();
     	try {
-    		ZipFile zipFile = new ZipFile(dir + "/mda/src/uml/xml.zips/andromda-profile-datatype-3.1.xml.zip");
+    		ZipFile zipFile = new ZipFile(userHome + "\\.maven\\repository\\andromda\\xml.zips\\andromda-profile-datatype-3.1.xml.zip");
     		Enumeration entries = zipFile.entries();
     		ZipEntry entry = null;
     		if(entries.hasMoreElements()){
