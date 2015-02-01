@@ -9,9 +9,31 @@ public abstract class UtilServiceHandlerBean implements javax.ejb.SessionBean, U
     
 	    
 	public abstract void clearSecondCache();
+	
+	public  java.util.List<br.uff.projetoCrud.cd.AbstractEntity> handleManipula(br.uff.projetoCrud.cd.AbstractEntity entity, br.uff.projetoCrud.action.Action action) throws br.uff.projetoCrud.action.ActionException
+	{
+		try{ 
+			return action.execute(entity);   
+		} catch (br.uff.projetoCrud.cd.DAOException e) {
+			throw new br.uff.projetoCrud.action.ActionException(e);
+		}
+	}
+	
+#foreach ($entity in $entities)
 
-#if ($securityRealm)
-	public abstract void reloadAccessControl();
+	public abstract java.util.List<${customTypesPackage}.cd.AbstractEntity> handleManipula${entity.name}(${entity.packageName}.${entity.name} ${entity.name.toLowerCase()}, ${customTypesPackage}.action.Action action) throws ${customTypesPackage}.action.ActionException;
+	
+	public  java.util.List<${customTypesPackage}.cd.AbstractEntity> manipula${entity.name}(${entity.packageName}.${entity.name} ${entity.name.toLowerCase()}, ${customTypesPackage}.action.Action action) throws ${customTypesPackage}.action.ActionException{						 		
+		 boolean responsibleSession = false;
+		 try{
+		 responsibleSession = ${customTypesPackage}.cd.AbstractDAO.getSession();
+		 handleManipula${entity.name}(${entity.name.toLowerCase()}, action);
+		 return handleManipula((${entity.packageName}.${entity.name}Abstract)${entity.name.toLowerCase()}, action);		 
+		 } finally {		 				 			
+			if(responsibleSession)
+				${customTypesPackage}.cd.AbstractDAO.closeSession();
+		}
+	}
 #end
    
     protected javax.ejb.SessionContext ctx = null;

@@ -5,6 +5,11 @@ public interface UtilServiceHandler extends javax.ejb.EJBObject, UtilServiceHand
 
 	public void clearSecondCache() throws java.rmi.RemoteException;
 
+#foreach ($entity in $entities)
+	
+	public  abstract  java.util.List<${customTypesPackage}.cd.AbstractEntity> manipula${entity.name}(${entity.packageName}.${entity.name} ${entity.name.toLowerCase()}, ${customTypesPackage}.action.Action action) throws java.rmi.RemoteException, ${customTypesPackage}.action.ActionException;
+#end
+
 #if ($securityRealm)
 	public void reloadAccessControl() throws java.rmi.RemoteException;
 #end

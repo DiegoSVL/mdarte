@@ -4,6 +4,11 @@ package ${customTypesPackage};
 public interface UtilServiceHandlerBI {
 	public void clearSecondCache() throws Exception;
 
+#foreach ($entity in $entities)
+	
+	public  abstract  java.util.List<${customTypesPackage}.cd.AbstractEntity> manipula${entity.name}(${entity.packageName}.${entity.name} ${entity.name.toLowerCase()}, ${customTypesPackage}.action.Action action) throws Exception, ${customTypesPackage}.action.ActionException;
+#end
+
 #if ($securityRealm)
 	public void reloadAccessControl() throws Exception;
 #end

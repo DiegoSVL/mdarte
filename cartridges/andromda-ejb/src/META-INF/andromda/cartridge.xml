@@ -667,31 +667,55 @@
         outlet="shared-session-beans"
         overwrite="true"
         generateEmptyFiles="false"/>
-        
-   <template
-        path="templates/ejb/util-service/Session.vsl"
-        outputPattern="$generatedFile"
-        outlet="shared-session-beans-impl"
-        overwrite="true"/>
-        
-   <template
+
+	<template
         path="templates/ejb/util-service/SessionBean.vsl"
         outputPattern="$generatedFile"
         outlet="shared-session-beans-impl"
-        overwrite="true"/>
-
+        overwrite="true"
+        outputToSingleFile="true"
+        outputOnEmptyElements="false">
+        <modelElements>
+            <modelElement variable="entities">
+                <type name="org.andromda.cartridges.ejb.metafacades.EJBEntityFacadeLogicImpl"/>
+            </modelElement>
+		</modelElements>
+	</template>
+	
+	<template
+        path="templates/ejb/util-service/SessionBI.vsl"
+        outputPattern="$generatedFile"
+        outlet="shared-session-beans-impl"
+		overwrite="true"
+        outputToSingleFile="true"
+        outputOnEmptyElements="false">
+        <modelElements>
+            <modelElement variable="entities">
+                <type name="org.andromda.cartridges.ejb.metafacades.EJBEntityFacadeLogicImpl"/>
+            </modelElement>
+		</modelElements>
+	</template>
+	
+	<template
+        path="templates/ejb/util-service/Session.vsl"
+        outputPattern="$generatedFile"
+        outlet="shared-session-beans-impl"
+		overwrite="true"
+        outputToSingleFile="true"
+        outputOnEmptyElements="false">
+        <modelElements>
+            <modelElement variable="entities">
+                <type name="org.andromda.cartridges.ejb.metafacades.EJBEntityFacadeLogicImpl"/>
+            </modelElement>
+		</modelElements>
+	</template>
+    
    <template
         path="templates/ejb/util-service/SessionBeanImpl.vsl"
         outputPattern="$generatedFile"
         outlet="shared-session-beans-impl"
         overwrite="false"/>
  
-   <template
-        path="templates/ejb/util-service/SessionBI.vsl"
-        outputPattern="$generatedFile"
-        outlet="shared-session-beans-impl"
-        overwrite="true"/>
-        
    <template
         path="templates/ejb/util-service/SessionLocalHome.vsl"
         outputPattern="$generatedFile"
